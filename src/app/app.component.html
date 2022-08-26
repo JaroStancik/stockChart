@@ -1,12 +1,13 @@
 <div style="padding: 20px">
   <input
-    placeholder="Enter ticker of stock or index"
+    placeholder="Enter stock ticker or index"
     class="input-search"
     style="text-transform: uppercase"
     value="VOO"
     #ticker
     type="search"
     (keyup)="onKeyup($event)"
+    (search)="onSearch($event)"
   />
 
   <input

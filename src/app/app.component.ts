@@ -15,16 +15,14 @@ export class AppComponent implements OnInit {
   httpsUrl: string = 'https://api.polygon.io';
   stockData: any;
   btnDisabled: boolean = false;
-  ticker: string = 'VOO';
+  ticker: string = '';
 
   constructor(
     private http: HttpClient,
     private notifyService: NotificationService
   ) {}
 
-  //TODO:
-  // fix => disable the search button when is pressed x
-  // fix => when user presses enter search function is not runned
+  // TODO:
   // fix => do not change all class when disabling button, change just background color style
   // add time range selector
   // add chart
@@ -68,9 +66,17 @@ export class AppComponent implements OnInit {
       );
   }
 
-  onKeyup(event: any) {
-    event.target.value.length === 0
+  onKeyup(event: Event) {
+    (event.target as HTMLInputElement).value.length === 0
       ? (this.btnDisabled = true)
       : (this.btnDisabled = false);
+  }
+
+  // when cross icon/clearing or enter is pressed
+  onSearch(event: Event) {
+    this.ticker = (event.target as HTMLInputElement).value;
+
+    if (this.ticker.length > 0) this.fetchPosts(this.ticker);
+    else this.btnDisabled = true;
   }
 }
