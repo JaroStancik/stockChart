@@ -1,0 +1,72 @@
+.table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  margin-left: 20px;
+  // font-size: 0.9em;
+  // font-family: sans-serif;
+  min-width: 430px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border-radius: 10px 10px 10px 10px;
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  padding: 12px 15px;
+}
+
+.table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.input-search {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 15px;
+  -webkit-appearance: none;
+  border: 1px solid transparent;
+  width: 330px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+  // optional
+  background-color: #f3f3f3;
+
+  &:focus {
+    color: black;
+    outline: 0;
+  }
+}
+
+.button-searchEna {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 15px;
+  -webkit-appearance: none;
+  border: 1px solid transparent;
+  width: 100px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  // optional
+  cursor: pointer;
+  background-color: #7e1fff;
+  color: #fff;
+}
+
+.button-searchDis {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 15px;
+  -webkit-appearance: none;
+  border: 1px solid transparent;
+  width: 100px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  // optional
+  cursor: pointer;
+  background-color: grey;
+  color: #fff;
+}
