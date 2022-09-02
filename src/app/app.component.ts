@@ -46,8 +46,8 @@ export class AppComponent implements OnInit {
           this.myApiKey
         // 'https://api.polygon.io/v2/aggs/ticker/AAPL/range/1/day/2021-07-22/2021-07-22?adjusted=true&sort=asc&limit=120&apiKey=uXap2pPhTixSUYreiz7_cSp2UAmp_Hl2'
       )
-      .subscribe(
-        (responseData) => {
+      .subscribe({
+        next: (responseData) => {
           console.log(responseData);
           if (responseData?.resultsCount > 0) {
             this.stockData = { ...responseData };
@@ -59,10 +59,10 @@ export class AppComponent implements OnInit {
             );
           }
         },
-        (error) => {
+        error: (error) => {
           console.log('LOG', error.error.error);
           this.notifyService.showError(error.error.error, '');
-        }
+        }}
       );
   }
 
