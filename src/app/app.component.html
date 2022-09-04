@@ -1,4 +1,7 @@
-<meta name="google-site-verification" content="jgQqhNOpbi0AvC5QPXMTdrN-PDh3BHmkoWTTEuCmX0c" />
+<meta
+  name="google-site-verification"
+  content="jgQqhNOpbi0AvC5QPXMTdrN-PDh3BHmkoWTTEuCmX0c"
+/>
 <div style="padding: 20px">
   <input
     placeholder="Enter stock ticker or index"
@@ -51,3 +54,8 @@
     </tr>
   </tbody>
 </table>
+
+<datepicker
+  (onDateChange)="onUpdatedDate($event)"
+  [defaultDate]="this.date"
+></datepicker>
