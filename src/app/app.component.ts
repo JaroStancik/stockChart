@@ -39,13 +39,17 @@ export class AppComponent implements OnInit {
   }
 
   subtractDays(date: Date): string {
-    // subtract 1 day from actual date when there is Saturday, when there is Sunday subtract 2 days
+    // subtract 1 day from actual date when there is Saturday, when there is Sunday subtract 2 days, for Monday 3 days,
+    // so one can get dat from the Friday
     // it is because api returns the data just from the day when the market was opened + it can not be the actual date
 
     let subtractDays: number = 0;
     switch (date.getDay()) {
       case 0: //0 being Sunday
         subtractDays = 2;
+        break;
+      case 1: //1 being Monday
+        subtractDays = 3;
         break;
       default:
         subtractDays = 1;
