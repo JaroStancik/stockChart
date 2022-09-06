@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import { IstockData } from './IstockData';
 import { NotificationService } from './notification.service';
 import { env } from '../environments/env';
+import { formatDateToString } from './datepicker/formatter';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,8 @@ export class AppComponent implements OnInit {
   ticker: string = 'VOO';
   date: string = '';
 
+  @ViewChild('tickerRef') tickerRef!: ElementRef;
+
   constructor(
     private http: HttpClient,
     private notifyService: NotificationService
@@ -25,33 +28,33 @@ export class AppComponent implements OnInit {
 
   // TODO:
   // fix => do not change all class when disabling button, change just background color style
-  // fix => now the datapicker substract 1 day from the actual date
+  // fix => when there is error received delete data for the non existing date, if it is possible
   // add chart
-  // check if the api returns just data from the closed day or also from the actual opened day
   // change first default date in the datepicker to MM/DD/YYYY instead of MM-DD-YYYY
   // forbid to choose the future days in the datepicker
 
   ngOnInit(): void {
-    // substract 1 day from actual date when there is Saturday, when there is Sunday substract 2 days
-    // it is because api returns the data just from the day when the market was opened
-    let whichDay: Date = new Date();
+    this.date = this.subtractDays(new Date());
+    this.fetchPosts();
+  }
+
+  subtractDays(date: Date): string {
+    // subtract 1 day from actual date when there is Saturday, when there is Sunday subtract 2 days
+    // it is because api returns the data just from the day when the market was opened + it can not be the actual date
+
     let subtractDays: number = 0;
-    switch (whichDay.getDay()) {
+    switch (date.getDay()) {
       case 0: //0 being Sunday
         subtractDays = 2;
-        console.log('ned');
         break;
-      case 6: //6 beign Saturday
-        console.log('S');
+      default:
         subtractDays = 1;
         break;
     }
-
-    let date = new Date(
+    let subtractDate = new Date(
       new Date().setDate(new Date().getDate() - subtractDays)
     );
-    this.date = date.toISOString().split('T')[0]; //format to YYYY-MM-DD which is defined by the api
-    this.fetchPosts();
+    return formatDateToString(subtractDate);
   }
 
   onFetchPosts(ticker: string): void {
@@ -109,6 +112,7 @@ export class AppComponent implements OnInit {
 
   onUpdatedDate(date: string) {
     this.date = date;
+    this.ticker = this.tickerRef.nativeElement.value;
     this.fetchPosts(this.ticker);
   }
 }
