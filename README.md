@@ -2,7 +2,9 @@
 
 Simple stock data app, user can retrieve data from the api provided by https://polygon.io/docs/stocks/getting-started. One must create new env.ts file in the environment folder and save there generated personal apiKey from the polygon.io site.
 
-![Simple stock application](/src/stockChart.png)
+<p align="center">
+    <img src="src/stockChart.png" alt="Simple stock application">
+ </p>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.6.
 
